@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackshadow Library - WordPress Embedding Gateway</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #d1d1d1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ffffff;
+            font-family: Georgia, serif;
+            font-style: italic;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-size: 2.2rem;
+        }
+        h2 {
+            color: #ff3b30;
+            font-size: 1.1rem;
+            margin-top: 40px;
+            text-transform: uppercase;
+            font-family: monospace;
+            letter-spacing: 2px;
+            border-left: 2px solid #ff3b30;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #eaeaea;
+            font-size: 0.95rem;
+            font-family: monospace;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+        p {
+            color: #8e8e93;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        strong {
+            color: #ffffff;
+        }
+        .explanation-card {
+            background-color: #0b0b0c;
+            border: 1px solid #221a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 2px;
+        }
+        .code-container {
+            position: relative;
+            background-color: #000;
+            border: 1px solid #1a1a1a;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+        }
+        pre {
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.85rem;
+            color: #a5d6a7;
+            line-height: 1.5;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: #c53030;
+            transform: translateY(-1px);
+        }
+        .badge {
+            background-color: #1a1a1a;
+            color: #ff3b30;
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-family: monospace;
+            border: 1px solid #333;
+            margin-left: 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        ol {
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            color: #8e8e93;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Blackshadow Library - WordPress Integration</h1>
+    
+    <div class="explanation-card">
+        <p><strong>The Root Cause of "useState of null" Errors:</strong></p>
+        <p>WordPress environments (especially when using plugins like Gutenberg, Elementor, or block-based themes) pre-load their own customized, global versions of React on the page. When raw HTML code blocks attempt to inject external CDN links for React (<code style="color: #ff3b30;">unpkg.com/react</code>), the two React versions collide on the global window context. This corrupts the internal hook dispatchers, throwing the <strong>useState of null</strong> error and crashing to a black screen.</p>
+        
+        <p><strong>The Ultimate, Bulletproof Solution:</strong></p>
+        <p>To eliminate this conflict permanently, your application has been upgraded with a <strong>Fully Sandboxed Isolation Tunnel</strong>. Using a secure custom frame ensures that your library operates with pristine styling, dedicated scripts, and its own React engine in absolute isolation, completely decoupled from WordPress's code.</p>
+    </div>
+
+    <!-- METHOD 1 -->
+    <h2>Method 1: Premium Sandboxed Gateway (100% Recommended) <span class="badge">Pruned & Stable</span></h2>
+    <p>This code block creates a responsive, isolated frame that connects directly to your live sandbox app instance. It renders seamlessly, overrides mobile overflow limits nicely, and provides instant, lag-free loading with full Firebase synchronization.</p>
+    <p><strong>Bonus:</strong> The app has now been updated to include your actual website <code style="color: #ff3b30;">https://blackshadow.blog</code> directly integrated in the "Journal" tab for super-easy synchronized viewing!</p>
+    
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode('iframe-code')">Copy Embed Code</button>
+        <pre id="iframe-code">&lt;!-- START BLACKSHADOW DARK LIBRARY EMBED BLOCK --&gt;
+&lt;div class="blackshadow-embed-frame-wrapper" style="width: 100%; max-width: 1300px; margin: 0 auto; background-color: #050505; border: 1px solid #1c1c1f; overflow: hidden; box-shadow: 0 12px 50px rgba(0,0,0,0.95);"&gt;
+    &lt;div class="blackshadow-embed-header" style="background-color: #070708; border-bottom: 1px solid #1c1c1f; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;"&gt;
+        &lt;div style="display: flex; align-items: center; gap: 8px;"&gt;
+            &lt;span style="color: #ff3b30; font-size: 11px;"&gt;✦&lt;/span&gt;
+            &lt;span style="font-family: monospace; font-size: 9px; color: #8e8e93; text-transform: uppercase; letter-spacing: 2px;"&gt;BLACKSHADOW VAULT ARCHIVES&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;button onclick="document.getElementById('blackshadow-vault-iframe').src += ''" style="background: transparent; border: 1px solid #222; color: #8e8e93; font-family: monospace; font-size: 9px; padding: 4px 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s;" onmouseover="this.style.borderColor='#ff3b30'; this.style.color='#fff'" onmouseout="this.style.borderColor='#222'; this.style.color='#8e8e93'"&gt;Refresh Connection&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="blackshadow-iframe-shell" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; min-height: 850px; overflow: hidden; background: #000;"&gt;
+        &lt;iframe 
+            id="blackshadow-vault-iframe" 
+            src="https://ais-pre-3ifpp2ufw4gkepuum67r6q-214451920826.europe-west1.run.app" 
+            title="Blackshadow Library Archives" 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+            allow="camera; microphone; geolocation; autoplay; clipboard-write; encrypted-media; picture-in-picture" 
+            referrerpolicy="no-referrer"
+            sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"&gt;
+        &lt;/iframe&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- END BLACKSHADOW DARK LIBRARY EMBED BLOCK --&gt;</pre>
+    </div>
+
+    <!-- STEPS TO INSTALL -->
+    <h2>Steps to Embed into your WordPress Post or Page</h2>
+    <ol>
+        <li>Open your WordPress Administrator Panel.</li>
+        <li>Navigate to the specific page or post where you want the library to appear (e.g. your Library page).</li>
+        <li>Add a <strong>Custom HTML</strong> block using the Gutenberg Editor, or insert a <strong>Text / Code HTML</strong> block if using Elementor, Divi, or Classic Editor.</li>
+        <li>Paste the copied Embed Code inside the raw block input field.</li>
+        <li>Update or Publish the page. It will function instantly in full pitch-black color layout with offline backup protection!</li>
+    </ol>
+
+    <script>
+        function copyCode(elementId) {
+            const preElement = document.getElementById(elementId);
+            const textToCopy = preElement.innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Copied to clipboard. Ready to paste inside your WordPress HTML editor block.');
+            }).catch(err => {
+                console.error('Copy failed: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

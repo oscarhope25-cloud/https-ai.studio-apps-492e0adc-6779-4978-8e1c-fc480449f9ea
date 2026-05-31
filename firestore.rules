@@ -1,0 +1,115 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default global deny-all fallback
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Primitive check definitions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        request.auth.token.email == 'oscarhope25@gmail.com'
+      );
+    }
+
+    // Schema and structural validators
+    function isValidBook(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.title is string && data.title.size() <= 200
+        && data.author is string && data.author.size() <= 100
+        && data.tags is list && data.tags.size() <= 20
+        && data.isPremium is bool;
+    }
+
+    function isValidVideo(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.title is string && data.title.size() <= 200
+        && data.duration is string && data.duration.size() <= 50
+        && data.thumbnail is string && data.thumbnail.size() <= 1000
+        && data.videoUrl is string && data.videoUrl.size() <= 1000
+        && data.tags is list && data.tags.size() <= 20
+        && data.isPremium is bool
+        && data.description is string && data.description.size() <= 2000;
+    }
+
+    function isValidReview(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.itemType is string && (data.itemType == 'book' || data.itemType == 'video')
+        && data.itemId is string && data.itemId.size() <= 128
+        && data.itemTitle is string && data.itemTitle.size() <= 200
+        && data.author is string && data.author.size() <= 100
+        && data.rating is int && data.rating >= 1 && data.rating <= 5
+        && data.comment is string && data.comment.size() <= 5000
+        && data.date is string && data.date.size() <= 50
+        && data.likes is int
+        && data.userId == request.auth.uid;
+    }
+
+    function isValidSubscription(data) {
+      return data.userId is string && data.userId == request.auth.uid
+        && data.isActive is bool
+        && (data.plan == null || (data.plan is string && (data.plan == 'monthly' || data.plan == 'trimester')));
+    }
+
+    // --- Core Catalog Access Rules ---
+
+    match /books/{bookId} {
+      allow read: if true;
+      allow create: if isValidId(bookId) && isValidBook(incoming());
+      allow update, delete: if isAdmin() && isValidId(bookId) && isValidBook(incoming());
+    }
+
+    match /videos/{videoId} {
+      allow read: if true;
+      allow create: if isValidId(videoId) && isValidVideo(incoming());
+      allow update, delete: if isAdmin() && isValidId(videoId) && isValidVideo(incoming());
+    }
+
+    // --- Interactive Subsystem Access Rules ---
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn() && isValidId(reviewId) && isValidReview(incoming());
+      allow update: if isSignedIn() && isValidId(reviewId) && isValidReview(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['likes']) ||
+        (existing().userId == request.auth.uid && incoming().diff(existing()).affectedKeys().hasOnly(['rating', 'comment', 'date']))
+      );
+      allow delete: if isSignedIn() && isValidId(reviewId) && (existing().userId == request.auth.uid || isAdmin());
+    }
+
+    match /subscriptions/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow create, update: if isSignedIn() && request.auth.uid == userId && isValidSubscription(incoming());
+      allow delete: if isAdmin();
+    }
+
+    // --- User-specific Progression Locks ---
+
+    match /users/{userId}/readingState/{bookId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId && isValidId(bookId);
+    }
+
+    match /users/{userId}/watchingState/{videoId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId && isValidId(videoId);
+    }
+  }
+}

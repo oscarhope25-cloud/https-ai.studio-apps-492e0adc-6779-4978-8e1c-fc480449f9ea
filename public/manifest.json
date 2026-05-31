@@ -1,0 +1,38 @@
+{
+  "short_name": "Blackshadow",
+  "name": "Blackshadow Library",
+  "description": "The premium gothic reading library and logs archive.",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#030001",
+  "theme_color": "#070001",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["books", "entertainment", "education"],
+  "shortcuts": [
+    {
+      "name": "Almanac Logs",
+      "url": "/?tab=journal",
+      "description": "Read deep meditations and journal philosophy logs"
+    }
+  ]
+}

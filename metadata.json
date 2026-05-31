@@ -1,0 +1,6 @@
+{
+  "name": "Blackshadow Library",
+  "description": "An atmospheric, minimalist, dark and red-themed digital library for eBooks and animated videos inspired by blackshadow.blog, featuring custom eBook reading, tag organization, reading sync, atmospheric blog logs, and premium subscriptions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

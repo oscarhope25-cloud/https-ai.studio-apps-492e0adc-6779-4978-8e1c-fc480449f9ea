@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "Book": {
+      "title": "Book",
+      "description": "An eBook stored in the library",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "pdfUrl": { "type": "string" },
+        "content": { "type": "array" },
+        "tags": { "type": "array" },
+        "progress": { "type": "number" },
+        "currentChapter": { "type": "number" },
+        "bookmarks": { "type": "array" },
+        "isPremium": { "type": "boolean" },
+        "notes": { "type": "array" },
+        "rating": { "type": "number" },
+        "downloaded": { "type": "boolean" }
+      },
+      "required": ["id", "title", "author", "content", "tags", "isPremium"]
+    },
+    "Video": {
+      "title": "Video",
+      "description": "A masterclass video stored in the library",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "duration": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "tags": { "type": "array" },
+        "progress": { "type": "number" },
+        "isPremium": { "type": "boolean" },
+        "description": { "type": "string" },
+        "downloaded": { "type": "boolean" }
+      },
+      "required": ["id", "title", "duration", "thumbnail", "videoUrl", "tags", "isPremium", "description"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "An eBook or video review made by a reader",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "itemType": { "type": "string", "enum": ["book", "video"] },
+        "itemId": { "type": "string" },
+        "itemTitle": { "type": "string" },
+        "author": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "date": { "type": "string" },
+        "likes": { "type": "number" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "itemType", "itemId", "itemTitle", "author", "rating", "comment", "date", "likes"]
+    },
+    "Subscription": {
+      "title": "Subscription",
+      "description": "A user's membership subscription pact status",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "plan": { "type": "string", "enum": ["monthly", "trimester"] },
+        "trialStartDate": { "type": "string" },
+        "trialEndDate": { "type": "string" },
+        "expiresAt": { "type": "string" }
+      },
+      "required": ["userId", "isActive"]
+    }
+  },
+  "firestore": {
+    "/books/{bookId}": {
+      "schema": "Book",
+      "description": "eBooks accessible to users or administrators"
+    },
+    "/videos/{videoId}": {
+      "schema": "Video",
+      "description": "Masterclass video catalogue streams"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Critiques posted by authenticated users"
+    },
+    "/subscriptions/{userId}": {
+      "schema": "Subscription",
+      "description": "Secure access status of a user's subscription"
+    }
+  }
+}
